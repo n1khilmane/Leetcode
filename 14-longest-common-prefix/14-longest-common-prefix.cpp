@@ -4,8 +4,9 @@ public:
         
         //if(strs.length()==0) return "";
         
-        string prefix = strs[0];
+    
         string ans = "";
+        
         for(int i=0;i<strs[0].length();i++){
             
             char ch = strs[0][i];
