@@ -1,19 +1,17 @@
 class Solution {
 public:
-    bool canConstruct(string ransomNote, string magazine) {
+    bool canConstruct(string a, string b) {
+        map<char, int> mp;
         
-        
-        sort(ransomNote.begin(), ransomNote.end());
-        sort(magazine.begin(), magazine.end());
-        
-        int i,j=0;
-        for(auto it: magazine){
-            if(it==ransomNote[j] && j<ransomNote.length()){
-                j++;
-            }
+        for(int i=0; i<b.length(); i++) {
+            mp[b[i]]++;
         }
- return j>=ransomNote.length() ? true : false;
-    }
         
-    
+        for(int i=0; i<a.length(); i++) {
+            if(mp[a[i]]>0) mp[a[i]]--;
+            else return false;
+        }
+        
+        return true;
+    }
 };
