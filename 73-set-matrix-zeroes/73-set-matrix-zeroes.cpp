@@ -6,6 +6,8 @@ public:
         int rows = matrix.size();
         int cols = matrix[0].size();
         
+        
+        //use first row and first column as dummy array to store the possible 0s
         for(int i=0;i<rows;i++)
         {
             if(matrix[i][0]==0)
@@ -21,6 +23,8 @@ public:
             }
         }
         
+        
+        //start from behind and fill up the existing matrix with 0s 
         for(int i=rows-1;i>=0;i--)
         {
             for(int j=cols-1;j>=1;j--)
