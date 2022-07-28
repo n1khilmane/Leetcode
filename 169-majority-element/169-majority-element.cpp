@@ -1,29 +1,24 @@
 class Solution {
 public:
-    int majorityElement(vector<int>& arr) {
-
-        map<int,int>map;
-        int m=arr.size()/2;
-        int i,y;
-        for ( i = 0; i < arr.size(); ++i)
-            {
-                if(map[arr[i]])
-                    {
-                        map[arr[i]]++;
-                    }
-                else
-                    {
-                        map[arr[i]]=1;
-                    }
-            }
+    int majorityElement(vector<int>& nums) {
         
-        for(auto i:map)
-            {
-                if(i.second>m)
-                y= i.first;
-            }
-        return y;
-}
+        int count=0;
+        int candidate=0;
+        
+        for(int i=0;i<nums.size();i++)
+        {
+            if(count==0)
+                candidate=nums[i];
+            
+            if(nums[i]==candidate)
+                count++;
+            
+            else
+                count--;
+            
+        }
+        
+        return candidate;
+        
+    }
 };
-        
-    
