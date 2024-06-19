@@ -1,19 +1,21 @@
 class TimeMap {
 public:
-    unordered_map<string,map<int,string>>m;
-    TimeMap() {
-        
-    }
+    unordered_map<string, map<int, string, greater<int>>> mp;
+    TimeMap() {}
     
     void set(string key, string value, int timestamp) {
-        m[key][timestamp]=value;
+        mp[key][timestamp] = value;
     }
     
     string get(string key, int timestamp) {
-        auto it=m[key].upper_bound(timestamp);
-        if(it==m[key].begin())return "";
-        it--;
-        return it->second;
+        
+        auto &v = mp[key];
+        
+        auto itm = v.lower_bound(timestamp);
+        if(itm == v.end()) return "";
+        
+        return itm->second;
+
     }
 };
 
