@@ -1,7 +1,6 @@
 class Solution {
 public:
     int hammingWeight(int n) {
-        
 
         int bit = 0;
         int result = 0;
@@ -15,7 +14,5 @@ public:
         }
         
         return result;
-
-        
     }
 };
