@@ -10,10 +10,10 @@ public:
         int n = text1.size();
         int m = text2.size();
         
-        // Create a dp table
+      
         vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
         
-        // Fill the dp table
+  
         for (int i = 1; i <= n; ++i) {
             for (int j = 1; j <= m; ++j) {
                 if (text1[i - 1] == text2[j - 1]) {
@@ -24,7 +24,7 @@ public:
             }
         }
         
-        // The answer is in the last cell of the dp table
+        
         return dp[n][m];
     }
 };
