@@ -13,12 +13,13 @@ public:
             ump2[t[i]]++;
         }
 
-       
-        for(int i=0;i<ump1.size();i++)
+        
+        for(auto itr=ump1.begin();itr!=ump1.end();itr++)
         {
-            if(ump1[i]!=ump2[i]) return false;
+            if(ump2[itr->first]!=itr->second) return false;
         }
-
+       
+  
         return true;
         
     }
