@@ -1,18 +1,22 @@
 class Solution {
 public:
     int reverse(int x) {
-        int rev = 0;
-        while (x != 0) {
-            int temp = x % 10;
-            x /= 10;
-            if (rev > INT_MAX / 10 || (rev == INT_MAX / 10 && temp > 7)) {
-                return 0;
-            }
-            if (rev < INT_MIN / 10 || (rev == INT_MIN / 10 && temp < -8)) {
-                return 0;
-            }
-            rev = rev * 10 + temp;
+        vector<int> ans;
+        
+        while(x != 0) {
+            int k = x % 10;
+            ans.push_back(k);
+            x = x / 10;
         }
-        return rev;
+        
+        int n = ans.size();
+        long long m = 0; // Use long long to prevent overflow
+        for(int i = 0; i < n; i++) {
+            m = m * 10 + ans[i];
+            if (m > INT_MAX || m < INT_MIN) {
+                return 0; // Return 0 in case of overflow
+            }
+        }
+        return static_cast<int>(m);
     }
 };
