@@ -27,9 +27,11 @@ public:
             return helper(root->left) || helper(root->right);
         else if(root->val==3)
             return helper(root->left) && helper(root->right);
+        else{
+             return false;
+        } 
         
-        
-        return false;
+       
         
         
     }
