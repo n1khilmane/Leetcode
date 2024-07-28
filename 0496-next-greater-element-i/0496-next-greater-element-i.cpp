@@ -1,50 +1,35 @@
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        
-        map<int,int> mp;
         vector<int> ans;
-        vector<int> temp;
+        int n2 = nums2.size();
         stack<int> st;
-        int n = nums2.size();
+        unordered_map<int, int> mp; // key - nums2[i], value - next greater in nums2[i]
         
-        for(int i=n-1;i>=0;i--)
-        {
-            if(st.size()==0) temp.push_back(-1);
+        // Iterate over nums2 from the end to the beginning
+        for (int i = n2 - 1; i >= 0; --i) {
+            int num = nums2[i];
             
-            else if(st.size() > 0 && st.top()>nums2[i])
-            {
-                temp.push_back(st.top());
-                
+            // Maintain the stack to store elements in a decreasing order
+            while (!st.empty() && st.top() <= num) {
+                st.pop();
             }
             
-            else{
-                while(st.size() >0 && st.top()<nums2[i])
-                {
-                    st.pop();
-                }
-                
-                if(st.size()==0) temp.push_back(-1);
-                else temp.push_back(st.top());
+            // If stack is not empty, the top element is the next greater element
+            if (!st.empty()) {
+                mp[num] = st.top();
+            } else {
+                mp[num] = -1; // No greater element found
             }
-            st.push(nums2[i]);
+            
+            st.push(num); // Push the current element to the stack
         }
         
-        reverse(temp.begin(),temp.end());
-        
-        for(int i=0;i<n;i++)
-        {
-            mp[nums2[i]]=temp[i];
-        }
-        
-        for(int i=0;i<nums1.size();i++)
-        {
-            ans.push_back(mp[nums1[i]]);
+        // Fill the answer for elements in nums1 using the map
+        for (int num : nums1) {
+            ans.push_back(mp[num]);
         }
         
         return ans;
-        
-        
-        
     }
 };
