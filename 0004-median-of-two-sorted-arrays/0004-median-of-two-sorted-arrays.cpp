@@ -1,48 +1,33 @@
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        int m = nums1.size();
-        int n = nums2.size();
-        
-        if (m > n) {
-            return findMedianSortedArrays(nums2, nums1);
+        // Get the sizes of both input arrays.
+        int n = nums1.size();
+        int m = nums2.size();
+
+        // Merge the arrays into a single sorted array.
+        vector<int> merged;
+        for (int i = 0; i < n; i++) {
+            merged.push_back(nums1[i]);
         }
-        
-        int total = m + n;
-        
-        int low = 0;
-        int high = m;
-        
-        double result = 0.0;
-        
-        while (low <= high) {
-            // nums1
-            int i = low + (high - low) / 2;
-            // nums2
-            int j = (total + 1) / 2 - i;
-            
-            int left1 = (i > 0) ? nums1[i - 1] : INT_MIN;
-            int right1 = (i < m) ? nums1[i] : INT_MAX;
-            int left2 = (j > 0) ? nums2[j - 1] : INT_MIN;
-            int right2 = (j < n) ? nums2[j] : INT_MAX;
-            
-            // partition is correct
-            if (left1 <= right2 && left2 <= right1) {
-                // even
-                if (total % 2 == 0) {
-                    result = (max(left1, left2) + min(right1, right2)) / 2.0;
-                // odd
-                } else {
-                    result = max(left1, left2);
-                }
-                break;
-            } else if (left1 > right2) {
-                high = i - 1;
-            } else {
-                low = i + 1;
-            }
+        for (int i = 0; i < m; i++) {
+            merged.push_back(nums2[i]);
         }
-        
-        return result;
+
+        // Sort the merged array.
+        sort(merged.begin(), merged.end());
+
+        // Calculate the total number of elements in the merged array.
+        int total = merged.size();
+
+        if (total % 2 == 1) {
+            // If the total number of elements is odd, return the middle element as the median.
+            return static_cast<double>(merged[total / 2]);
+        } else {
+            // If the total number of elements is even, calculate the average of the two middle elements as the median.
+            int middle1 = merged[total / 2 - 1];
+            int middle2 = merged[total / 2];
+            return (static_cast<double>(middle1) + static_cast<double>(middle2)) / 2.0;
+        }
     }
 };
