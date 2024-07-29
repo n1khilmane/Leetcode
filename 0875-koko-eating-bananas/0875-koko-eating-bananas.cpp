@@ -2,38 +2,39 @@ class Solution {
 public:
     int minEatingSpeed(vector<int>& piles, int h) {
         
+        int n = piles.size();
+        
         int low = 1;
         int high = 0;
-        int n= piles.size();
+        
+        
         for(int i=0;i<n;i++)
         {
             high = max(high,piles[i]);
+            
         }
         
-        int res = high;
+        int ans = high;
         
-        while(low <= high)
+        while(low<=high)
         {
-            int k = low + (high-low)/2;
-            long int hours = 0;
-            
+            int mid = low + (high-low)/2;
+            long int temp = 0;
             for(int i=0;i<n;i++)
             {
-                hours += ceil((double)piles[i]/k);
+                temp += ceil((double) piles[i] / mid);
             }
             
-            if(hours<=h)
+            if(temp<=h)
             {
-                res = min(res,k);
-                high = k-1;
+                ans = min(ans, mid);
+                high = mid-1;
             }
             else{
-                low = k +1;
+                low = mid+1;
             }
         }
-        
-        return res;
-        
+        return ans;
         
     }
 };
