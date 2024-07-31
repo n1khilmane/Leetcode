@@ -21,7 +21,7 @@ public:
                 fast = fast->next;
             
             slow->next = fast;
-            slow = slow->next;
+            slow = fast;
         }
         
         return head;
