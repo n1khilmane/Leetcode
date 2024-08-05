@@ -2,7 +2,7 @@ class Solution {
 public:
     bool validTree(int n, vector<vector<int>>& edges) {
         if (n == 0) return false;
-        if (edges.size() != n - 1) return false; // Check if number of edges is exactly n-1
+        if (edges.size() != n - 1) return false;
         
         vector<vector<int>> adj(n);
         
@@ -11,12 +11,12 @@ public:
             adj[edge[1]].push_back(edge[0]);
         }
         
-        vector<int> vis(n, 0); // Initialize vis array to 0
-        int count = 0; // Use a reference to count in DFS
+        vector<int> vis(n, 0); 
+        int count = 0; 
         
-        if (!dfs(adj, vis, 0, -1, count)) return false; // Start DFS from node 0
+        if (!dfs(adj, vis, 0, -1, count)) return false; 
         
-        return count == n; // Check if all nodes are visited
+        return count == n;
     }
     
 private:
@@ -25,7 +25,7 @@ private:
         count++;
         
         for (auto it : adj[st]) {
-            if (it == parent) continue; // Skip the edge to the parent
+            if (it == parent) continue; 
             if (vis[it] || !dfs(adj, vis, it, st, count)) return false;
         }
         return true;
